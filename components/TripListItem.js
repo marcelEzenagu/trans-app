@@ -1,35 +1,59 @@
 import React from 'react'
-import { StyleSheet,  View,TouchableOpacity } from 'react-native'
+import { StyleSheet,  View} from 'react-native'
 import {Text, ListItem } from 'react-native-elements'
 
 const TripListItem = ({ trip }) => {
    
-    console.log("trips at tripList: ", trip)
     return (
-            <View>
-                <View  style={{alignItems:'center', marginBottom:10}}  >
-                    <Text>
-                            <Text h4>
-
-                            {trip.from}
-                            </Text> to  <Text h4>{trip.destination}</Text>
-                            <Text h4>
-                            {" "}Fee: {" "}
-                            </Text>
-                            #{trip.fee}
-                            <Text h4>Trip type: </Text>
-                            {trip.mode} trip
-                        
-                        <Text h4>By: {" "} </Text>
-                            {trip.vehicleType}
-                        <Text h4>Passenger space: {" "} </Text>
-                            {trip?.capacity}
-                            <Text h4>Trip schedule {' '} </Text>
-                            {trip.departureTime}
+            <View style= {styles.container}>
+                <View style={{ color:'white',padding:10}} >
+                    <Text h4>Trip Identity: {''}
+                        <Text style={styles.subText}>
+                            {trip?._id} 
                         </Text>
-                </View>
+                    </Text>
+                    
+                    <Text h4>Trip schedule: {''}
+                        <Text style={styles.subText}>
                             
-                         
+                            {trip?.departureTime} 
+                        </Text>
+                    </Text>
+                    
+                    <Text h4 >Destination: {''}
+                        <Text style={styles.subText}>
+                            
+                            {trip?.destination} 
+                        </Text>
+                    </Text>
+                    <Text h4 >From: {''}
+                        <Text style={styles.subText}>
+                            
+                         {trip?.from}
+                        </Text>
+                   
+                     </Text>
+                     <Text h4 >By: {''}
+                        <Text style={styles.subText}>
+                            
+                            {trip?.vehicleType} 
+                        </Text>
+                    </Text>
+                   
+                      <Text h4 >Passenger Spaces: {''}
+                        <Text style={styles.subText}>
+                            
+                            {trip?.capacity.toString()}
+                        </Text>
+                      </Text> 
+                   
+                    <Text h4 >Cost: {''}
+                        <Text style={styles.subText}>
+                            
+                           # {trip?.fee}
+                        </Text>
+                    </Text> 
+                </View>            
 
             </View>
                 
@@ -38,4 +62,17 @@ const TripListItem = ({ trip }) => {
 
 export default TripListItem
 
-const styles = StyleSheet.create({})
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,backgroundColor:'#2c68ed',
+        alignItems: 'center',
+       
+        justifyContent: 'center',
+        },
+    subText: {
+        color: 'white',fontWeight:'500', fontSize:15,
+        },
+    input: {width:300,color:'white'},
+    label:{color:'black', fontSize:20}
+})

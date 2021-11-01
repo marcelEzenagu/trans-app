@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack';
-
 import Dashboard from './../coreScreens/Dashboard'
 import Messages from './../screens/Messages';
 import Chat from './../screens/Chat';
@@ -15,6 +14,8 @@ import CreateTrip from './../screens/Admin/CreateTrip';
 import EditTrip from './../screens/Admin/EditTrip';
 import { useDispatch } from 'react-redux';
 import { getAdminTrips } from './../redux/trip/adminTripSlice';
+import socket from '../helpers/socket';
+import Tickets from '../screens/Admin/Tickets';
 
 
 const Stack = createStackNavigator();
@@ -26,12 +27,27 @@ const Stack = createStackNavigator();
   }
 
   
+  
   const EntryPoint = () => {
     const dispatch = useDispatch()
 
   useEffect(()=> {
         dispatch(getAdminTrips())
   }, [])
+
+  
+    useEffect(()=> {
+        socket.connect();
+            socket.on("connect_error", (err) => {
+                if (err.message === "invalid name"){
+                }
+            })
+
+          function destroyed() {
+            socket.off("connect_error")
+            }
+    }, [])
+
     return (
             <Stack.Navigator screenOptions={globalOption} 
             initialRouteName="Dashboard" 
@@ -43,11 +59,11 @@ const Stack = createStackNavigator();
                 <Stack.Screen name="Account" component={Account} /> 
                 <Stack.Screen name="Booking" component={Booking} /> 
                 <Stack.Screen name="EditTrip" component={EditTrip} /> 
-                
                 <Stack.Screen name="TicketingScreen" component={TicketingScreen} /> 
                 <Stack.Screen name="BookingStatus" component={BookingStatus} /> 
                 <Stack.Screen name="Trips" component={Trips} /> 
                 <Stack.Screen name="CreateTrip" component={CreateTrip} /> 
+                <Stack.Screen name="Tickets" component={Tickets} /> 
 
         
             </Stack.Navigator>

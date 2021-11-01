@@ -40,6 +40,7 @@ const AdminBoard = ({navigation}) => {
     }
 
     const handleRemoveTrip = (tripId) => {
+        console.log("tripId:", tripId)
         removeTrip(tripId).then(
             ()=> {dispatch(getAdminTrips())
         })
@@ -49,8 +50,8 @@ const AdminBoard = ({navigation}) => {
         // navigation.push('EditTrip', {trip})
     }
 
-    const toCustomerMessages = () => {
-        navigation.push('Messages')        
+    const toTickets = () => {
+        navigation.push('Tickets')        
     }
 
 
@@ -59,7 +60,7 @@ const AdminBoard = ({navigation}) => {
     }
 
     const toCreateTrip = () => {
-        navigation.push('Messages')        
+        navigation.push('CreateTrip')        
     }
 
     
@@ -68,33 +69,29 @@ const AdminBoard = ({navigation}) => {
     }
 
     return (
-        <View style={{width:'80%'}}>
-            <View  >
+        <View style={styles.container} >
+            <>
                 <View style={{flexDirection:"row",justifyContent:'space-evenly'}}>
-                <TouchableOpacity onPress={toCustomerMessages} style={styles.button}>
-     
-                        <Text  style={styles.text}>Customer Messages
-                            
-
-                        </Text>
-                  </TouchableOpacity>
-                
-                <TouchableOpacity onPress={toAdminMessages} style={styles.button}>
-                        <Text  style={styles.text}>Co-Admin message
-                            {/* <Text style={styles.superscript}>
-                                {' '}10
-                            </Text> */}
-                        </Text>
-                  
-                </TouchableOpacity>
+                    <TouchableOpacity onPress={toTickets} style={styles.button}>
+        
+                            <Text  style={styles.text}>Tickets
+                            </Text>
+                    </TouchableOpacity>
+                    
+                    <TouchableOpacity onPress={toAdminMessages} style={styles.button}>
+                            <Text  style={styles.text}>Messages
+                                {/* <Text style={styles.superscript}>
+                                    {' '}10
+                                </Text> */}
+                            </Text>
+                    
+                    </TouchableOpacity>
                  </View>
-                <View style={{flexDirection:"row",justifyContent:'space-between',alignSelf:'center',marginTop:10, width:'90%'}}>
+                <View style={{flexDirection:"row",justifyContent:'space-evenly',alignSelf:'center',marginVertical:10,}}>
 
                
-                    <TouchableOpacity onPress={toTrips} style={styles.button}>
-                      
-                            <Text   style={styles.text}>Trips</Text>
-                      
+                    <TouchableOpacity onPress={"#"} style={styles.button}>
+                            <Text   style={styles.text}>Completed Trips</Text>
                     </TouchableOpacity>
                     
                     <TouchableOpacity onPress={toCreateTrip} style={styles.button}>
@@ -102,27 +99,27 @@ const AdminBoard = ({navigation}) => {
                             <Text  style={styles.text}>CreateTrip</Text>
                         
                     </TouchableOpacity>
-                </View>
             </View>
+            </>
+            <Text h4  >All Trips </Text>
+            <ScrollView showsVerticalScrollIndicator={false}  contentContainerStyle={{
+            backgroundColor: '#2c68ed',width:'95%', justifyContent:'center', alignItems:'center'}}>
             {tripList.map((trip, i) => 
-            <ScrollView showsVerticalScrollIndicator={false} key ={i} contentContainerStyle={{flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
-                <TripListItem trip={trip}/>      
-                    <Button
-                        title='remove'
-                        color='red'
-                        containerStyle={{width:200,marginLeft:10,}}
-                        onPress = {()=> handleRemoveTrip(trip._id)}
-                    />
+                <View key={i} style={{flexDirection:"row",borderRadius:5, justifyContent:'center',alignItems:'center'}}>    
+                    <TripListItem  trip={trip}/>  
+                    <TouchableOpacity onPress= {()=> handleRemoveTrip(trip._id)}>
+                            <Text h4 h4Style={{marginLeft:10}} >X{" "}</Text>
+                    </TouchableOpacity>
                     <TouchableOpacity>
                         <Link to='/EditTrip'
                             action={StackActions.push('EditTrip', {trip})}
                             style={styles.link}>
-                            <Text h4 h4Style={{marginLeft:10,}} >Edit</Text>
+                            <Text h4 h4Style={{marginLeft:10}} >{" "}ED</Text>
                         </Link>
                     </TouchableOpacity>
-                
-            </ScrollView>
+                </View>
                 )}
+            </ScrollView>
         </View>
     )
 }
@@ -130,10 +127,16 @@ const AdminBoard = ({navigation}) => {
 export default AdminBoard
 
 const styles = StyleSheet.create({
-      button: {backgroundColor:'blue',
-     borderRadius:5 
-
-
+     container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    width:'100%',
+    justifyContent: 'center',
+    marginTop:10
+    },  
+      button: {backgroundColor:'#2c68ed',
+     borderRadius:3,marginLeft:5 
     },
     link :{
       padding:10 ,

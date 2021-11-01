@@ -11,75 +11,86 @@ const EditProfile = ({route, navigation}) => {
             phoneNumber:    user.phoneNumber,
             branch: user.branch,
             password:"",
-
             rePassword:"",
             error: '',
             open: false
         })
 
+        
+    const scrollBehavior = Platform.OS === "ios" ? "padding" : "height"
     return (
       <ScrollView contentContainerStyle={styles.container} >
-    
-            <Text h4 >{user?.name}'s profile</Text>
-            
+        <Text h4 style={{color:'white',marginTop:10,}} >{user?.name}'s profile</Text>
         {(user?.isAdmin) ?
         (
-            <KeyboardAvoidingView style={{width:'80%',}}  >
+            <KeyboardAvoidingView style={{width:'80%',}} behavior={scrollBehavior}  >
     
-                <Input                                 
+                <Input
+                    placeholderTextColor = {"black"}
+                    inputStyle={styles.input}
+                    labelStyle={styles.label}                                 
                     label="Full name"
                     placeholder="Enter your full name"
                     onChangeText={(text) => setValues({...values, fullName:text})}
-                        
                     value={values.fullName}
                 />
-                <Input                            
+                <Input
+                    placeholderTextColor = {"black"}
+                    inputStyle={styles.input}
+                    labelStyle={styles.label}                            
                     label="Email"                                
                     placeholder="Enter your email"
                     onChangeText={(text) => setValues({...values, email:text})}
                     value={values.email}
                 />
-                <Input                           
+                <Input
+                    placeholderTextColor = {"black"}
+                    inputStyle={styles.input}
+                    labelStyle={styles.label}                           
                     label="Phone Number"                                
                     placeholder="Enter your Phone Number"
                     onChangeText={(text) => setValues({...values, phoneNumber:text})}
                     value={values.phoneNumber}
                 />
                 <Input
+                    placeholderTextColor = {"black"}
+                    inputStyle={styles.input}
+                    labelStyle={styles.label}
                     label="Branch"                                
                     placeholder="Enter your branch"
                     onChangeText={(text) => setValues({...values, branch:text})}
                     value={values.branch}
                 />
-                
-                
-            
-                </KeyboardAvoidingView>
+            </KeyboardAvoidingView>
             
         ) : (
             
             <KeyboardAvoidingView style={styles.subContainer}  >
-                
-                    
-                
-                <Input                         
+                <Input
+                    placeholderTextColor = {"black"}         
+                    inputStyle={styles.input}
+                    labelStyle={styles.label}                         
                     label="Full name"
                     placeholder="Enter your full name"
-                    onChangeText={(text) => setValues({...values, fullName:text})}
-                        
+                    onChangeText={(text) => setValues({...values, fullName:text})} 
                     value={values.fullName}
                 />
                 <Input
+                    placeholderTextColor = {"black"}
+                    inputStyle={styles.input}
+                    labelStyle={styles.label}
                     label="Phone Number"
                     placeholder="Enter your Phone Number"
                     onChangeText={(text) => setValues({...values, phoneNumber:text})}
                     value={values.phoneNumber}
                 />
                 <Input
+                    placeholderTextColor = {"black"}
+                    inputStyle={styles.input}
+                    labelStyle={styles.label}
                     label="Email"
                     placeholder="Enter your email"
                     onChangeText={(text) => setValues({...values, email:text})}
-                    
                     value={values.email}
                 />
                     
@@ -105,20 +116,24 @@ const styles = StyleSheet.create({
         
         marginTop:5,
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#2c68ed',
+        // backgroundColor: '#fff',
         alignItems: 'center',
+        marginHorizontal:5,
+        borderRadius:5,
        
-        justifyContent: 'space-evenly',
+        // justifyContent: 'center',
     },
     subContainer: {
         padding:10,
         color:'white',
-        backgroundColor: '#2c68ed',
         alignItems: 'center',
         borderRadius:5,
-        width:'80%',
+        width:'90%',
         // justifyContent: 'center',
         
     },
+    input: {width:'100%',color:'white'},
+    label:{color:'white',width:'100%'},
    
 })

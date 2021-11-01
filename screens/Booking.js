@@ -14,64 +14,57 @@ const Booking = () => {
     return (
 
         <View style={styles.container}>
-                <Text  h4 style={{marginBottom:10}} >Looking to make a private trip? </Text>
-                <KeyboardAvoidingView style={{padding: 20,width:'80%',backgroundColor:'brown', borderColor:'grey', borderRadius:4}}>
-                    <View>
-                        <Input
-                            label="Travelling From"
-                            
-                            keyboardType='default'
-                            style={styles.input}
-                            placeholder="Enter Depature Terminal"
-                            value={from}
-                            onChangeText={(text) => setFrom(text)}
-                        />
-                    </View>
+            <KeyboardAvoidingView style={{padding: 20,width:'90%',backgroundColor:'#2c68ed', borderRadius:4}}>
+                <Text  h4 style={{marginBottom:10, alignSelf:'center', color:'white'}} >Interested in a private trip? </Text>
+                <Input
+                    label="Travelling From"
+                    keyboardType='default'
+                    inputStyle={styles.input}
+                    labelStyle={styles.label}
+                    placeholder="Enter Depature Terminal"
+                    value={from}
+                    onChangeText={(text) => setFrom(text)}
+                />
 
 
-                    <View>
-                        <Input
-                            label="Travelling To"
-                            style={styles.input}
-                            placeholder="Arrival Terminal"
-                            
-                            keyboardType='default'
-                            value={destination}
-                            onChangeText={(text) => setDestination(text)}
-                       
-                        />
-                    </View>
-                    <View style={{flexDirection:'row'}}>
+                <Input
+                    label="Travelling To"
+                    inputStyle={styles.input}
+                    labelStyle={styles.label}
+                    placeholder="Arrival Terminal"
+                    keyboardType='default'
+                    value={destination}
+                    onChangeText={(text) => setDestination(text)}
+                
+                />
 
-                        <View>
-                            <Input
-                                label="Depature"
-                                
-                                keyboardType='default'
-                                style={styles.input}
-                                placeholder="dd/mm/yyyy"
-                                value={departure}
-                                onChangeText={(text) => setDeparture(text)}
-                        
-                            />
-                        </View>
+                <Input
+                    label="Depature"
+                    
+                    keyboardType='default'
+                    inputStyle={styles.input}
+                    labelStyle={styles.label}
+                    placeholder="dd/mm/yyyy"
+                    value={departure}
+                    onChangeText={(text) => setDeparture(text)}
+                    
+                    />
 
-                        <View>
-                            <Input
-                                label="Traveller(s)"
-                                style={styles.input}
-                                placeholder="Choose a number"
-                                value={traveller}
-                                keyboardType='default'
-                                onChangeText={(text) => setTraveller(text)}
-                        
-                            />
-                        </View>
-                    </View>
-                     <Button color={'red'} containerStyle={{width:200, alignSelf:'center'}} title="Send" />
-                </KeyboardAvoidingView>
+                <Input
+                label="Traveller(s)"
+                inputStyle={styles.input}
+                labelStyle={styles.label}
+                placeholder="Choose a number"
+                value={traveller}
+                keyboardType='default'
+                onChangeText={(text) => setTraveller(text)}
+                
+                />
+
+                <Button color={'red'} containerStyle={{width:200, alignSelf:'center'}} title="Send" />
+            </KeyboardAvoidingView>
             
-    </View>
+        </View>
     )
 }
 
@@ -84,19 +77,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     // width:'100%',
     marginTop:10,
-    justifyContent: 'space-evenly',
+    justifyContent: 'center',
   },
-    subContainer: {
-        padding: 20,
-        // marginTop:20,
-        backgroundColor: 'blue',
-        // alignItems: 'center',
-        borderRadius:5,
-        flex:1
-    },
+    input: {width:'100%',color:'white'},
+    label:{color:'white'},
     
-  input: {
-      height:40,
-      padding:5,
-  }
 })

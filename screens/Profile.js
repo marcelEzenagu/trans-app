@@ -13,11 +13,9 @@ const Profile = ({navigation}) => {
     return (
         <View style={styles.container}>
             <View style= {styles.subContainer}>
-
-                
-                <View style={{flexDirection:'row',width:'80%', justifyContent:'space-between', alignItems:'center', marginTop:20,}}>
+                <View style={{flexDirection:'row',width:'90%', justifyContent:'space-between', alignItems:'center', marginTop:20,}}>
                     {/* <Image alt={user?.name} /> */}
-                    <Text style={{fontSize:18, color:'#2c68ed'}} >{user?.name}'s profile</Text>
+                    <Text style={{fontSize:18, }} >{user?.name}'s profile</Text>
                     <TouchableOpacity  >
                         <Link to='/EditProfile'
                             action={StackActions.push('EditProfile', {user})}
@@ -25,55 +23,44 @@ const Profile = ({navigation}) => {
                             <Text style={{marginLeft:10, fontWeight:'bold',}} >{" "}Edit</Text>
                         </Link>
                     </TouchableOpacity>
-            
                 </View>
-
                 {(user?.isAdmin) ?
                 (
-                <View> 
-                
                 <KeyboardAvoidingView  style={styles.subContainer}>
                     <ScrollView>
-                        <Text style={{color:'#2c68ed'}} >
+                        <Text style={{}} >
                             Full Name: {" "} <Text>{user?.name}</Text>
                         </Text>
-                        <Text style={{color:'#2c68ed'}} >
+                        <Text style={{}} >
                             Email: {" "} <Text>{user?.email}</Text>
                         </Text>
-                        <Text style={{color:'#2c68ed'}} >
+                        <Text style={{}} >
                             Branch: {" "} <Text>{user?.branch}</Text>
                         </Text>
-                        
-                        <Text style={{color:'#2c68ed'}} >
+                        <Text style={{}} >
                             Phone number: {" "} <Text >{user?.phoneNumber}</Text>
                         </Text>
-                            
-                        
                     </ScrollView>
-                        
-                    </KeyboardAvoidingView>
-                </View>
+                </KeyboardAvoidingView>
+                
                 ) : (
-                <View>
                     
-                    <KeyboardAvoidingView  >
-                        <ScrollView >
-                        
-                        
-                        <Text  style={{color:'#2c68ed'}}>
+                <KeyboardAvoidingView  >
+                    <ScrollView >
+                        <Text  style={{}}>
                             Full Name: {" "} <Text>{user?.name}</Text>
                         </Text>     
-                            <Text style={{color:'#2c68ed'}} >
+                            <Text style={{}} >
                             Email: {" "} <Text>{user?.email}</Text>
                         </Text>
-                        <Text style={{color:'#2c68ed'}} >
+                        <Text style={{}} >
                             Phone number: {" "} <Text>{user?.phoneNumber}</Text>
                         </Text>
                     </ScrollView>
                     
                         
-                    </KeyboardAvoidingView>
-                </View>
+                </KeyboardAvoidingView>
+             
                 ) 
                 }
             </View>
@@ -85,29 +72,25 @@ const Profile = ({navigation}) => {
 export default Profile
 
 const styles = StyleSheet.create({
-    container: {
-        
-        flex: 1,       
-        alignItems: 'center',
-       
-        marginTop:10,
-        justifyContent: 'space-evenly',
+     container: {
+         backgroundColor: '#fff',
+         alignItems: 'center',
+         marginTop:5,
+         flex: 1,
+        // justifyContent: 'center',
     },
-    
-    
     subContainer: {
-        padding: 20,
-        backgroundColor: 'white',
-        // alignItems: 'center'
+        padding:10,
         color:'white',
+        backgroundColor:"#2c68ed",
         borderRadius:5,
-        width:'80%',
-
-        flex:1
+        width:'90%',
+        marginHorizontal:10,
+        
     },
     textArea: {
-    height:35,
-    margin:6,
-    padding:5,
+        height:35,
+        margin:6,
+        padding:5,
   },
 })

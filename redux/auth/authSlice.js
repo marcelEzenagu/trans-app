@@ -9,11 +9,12 @@ const initialState = {
     }
 
 export const loginUser = createAsyncThunk('auth/loginUser', async(userDetails) => {
-    const res = await instance.post('auth/signin', userDetails)
     
-   const newData =  authenticate(res.data)
-
-    return res.data
+        const res = await instance.post('auth/signin', userDetails)
+        const newData =  authenticate(res.data)
+        console.log("data from apiCall", res)
+        return res.data
+    
 })
 
 export const authSlice = createSlice({
@@ -37,7 +38,5 @@ export const authSlice = createSlice({
 })
 
 const authReducer  = authSlice.reducer
-
-
 
 export default authReducer

@@ -16,9 +16,7 @@ export const isAuthenticated =async () => {
         
         const user = await AsyncStorage.getItem('jwt')
             return user != null ? JSON.parse(user) : null
-        
-        
-    } catch (e) {
+        } catch (e) {
         console.log("error at isAuthenticated: ", e)
     }
 }

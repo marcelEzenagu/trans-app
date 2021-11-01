@@ -30,15 +30,12 @@ const Stack = createStackNavigator();
         dispatch(getTrips())
     },[])
 
-    
-
-
     return (
         <NavigationContainer>
 
           <Stack.Navigator screenOptions={globalOption} initialRouteName="Login" >
               <Stack.Screen name="Login" component={Login} />     
-              <Stack.Screen name="SignUp" options={{ headerShown: false}} component={SignUpScreen} /> 
+              <Stack.Screen name="SignUp"  component={SignUpScreen} /> 
               <Stack.Screen  name="Main" component={Main} options={{ headerShown: false }} /> 
               <Stack.Screen name="ForgotPassword" options={{ headerShown: false}} component={ForgotPassword} />   
           </Stack.Navigator>
@@ -49,4 +46,3 @@ const Stack = createStackNavigator();
 
 export default RootNavigation
 
-const styles = StyleSheet.create({})

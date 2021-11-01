@@ -22,7 +22,6 @@ const Login = ({navigation}) => {
     useLayoutEffect(() => {
     navigation.setOptions({
         headerTitle: "Welcome to TransApp"
-    
     })
     },[navigation])
 
@@ -47,7 +46,7 @@ const Login = ({navigation}) => {
         setValues({...values, loading: true})
         dispatch(loginUser(userDetails))
         
-        .then((data) => {
+        .then(data => {
             if (data.error){
                 
         setValues({...values})
@@ -63,51 +62,52 @@ const Login = ({navigation}) => {
 
 
     
+    const scrollBehavior = Platform.OS === "ios" ? "padding" : "height"
     return (
-            <KeyboardAvoidingView behavior="padding"  style={styles.container}>
-                <View style={styles.subContainer}>
-                    <Text h4 style={{color: '#fff',fontWeight:'400', fontSize:20, marginBottom:35}} >Log in to your account</Text>
-                    <Text>
+        <KeyboardAvoidingView behavior={scrollBehavior}  style={styles.container}>
+            <View style={styles.subContainer}>
+                <Text h4 style={{color: '#fff',fontWeight:'400', fontSize:20, marginBottom:35}} >Log in to your account</Text>
+                <Text>
                     { error &&
                     <View>
-                            <Text style={styles.error} > {error} </Text>
-                    
-                        </View>
-                    }
-                    </Text>
-                        <Input
-                            label = "Phone number"
-                            inputStyle={styles.input}
-                            labelStyle={styles.label}
-                            placeholder="Enter your phoneNumber"
-                            onChangeText={(text) => setValues({ ...values, phoneNumber:text})}
-                            
-                            value={values.phoneNumber}
-                        />
-                        <Input
-                            label = "Password"
-                            
-                            inputStyle={styles.input}
-                            labelStyle={styles.label}
-                            placeholder="Enter password"
-                            onChangeText={(text) => setValues({...values, password:text})}
-                            value={values.password}
-                        />
-                        <Button title='Login'
-                        onPress={handleLogin} 
-                        color="white"
-                         disabled={!values.phoneNumber || !values.password || values.loading} 
-                        containerStyle={{marginTop:10, width:200,color:'blue', marginBottom:30}} 
-                        />
-                        
-                            <Text style={{fontWeight: '600'}} >Are you New? {" "}
-                                <Link to='/register'
-                                    action={StackActions.replace('SignUp')}
-                                    style={styles.link}>Create an account</Link>
-                            </Text>
-                     
+                        <Text style={styles.error} >{error}</Text>
                     </View>
-                </KeyboardAvoidingView>
+                    }
+                </Text>
+                <Input
+                    label = "Phone number"
+                    inputStyle={styles.input}
+                    labelStyle={styles.label}
+                    placeholder="Enter your phoneNumber"
+                    onChangeText={(text) => setValues({ ...values, phoneNumber:text})}
+                    value={values.phoneNumber}
+                />
+                <Input
+                    label = "Password"
+                    
+                    inputStyle={styles.input}
+                    labelStyle={styles.label}
+                    placeholder="Enter password"
+                    onChangeText={(text) => setValues({...values, password:text})}
+                    value={values.password}
+                />
+                <Button 
+                    title=  {values.loading ? "Loading..." : 'Login'}
+                    onPress={handleLogin} 
+                    color="white"
+                    style={{backgroundColor:'red',}}
+                    disabled={!values.phoneNumber || !values.password || values.loading} 
+                    containerStyle={{marginTop:10, width:200,backgroundColor:'red', marginBottom:30}} 
+                />
+                
+                <Text style={{fontWeight: '600'}} >Are you New? {" "}
+                    <Link to='/register'
+                        action={StackActions.replace('SignUp')}
+                        style={styles.link}>Create an account</Link>
+                </Text>
+            
+            </View>
+        </KeyboardAvoidingView>
                 
     )
 }

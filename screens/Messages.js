@@ -3,17 +3,16 @@ import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-nati
 import UserListItem from '../components/UserListItem'
 
 const Messages = ({navigation}) => {
-
     const data = [
         {_id:1, name:'Rishaa'},
         {_id:2, name:'Rahab'},
         {_id:3, name:'Ruth'},
-        
     ]
-  const  enterChat = (_id, name) => {
-      navigation.push("Chat", {_id, name})
 
+  const enterChat = (_id, name) => {
+      navigation.push("Chat", {_id, name})
     }
+    
     return (
         <View>
             <Text style={{fontWeight:'bold', marginLeft:15}}>Messages</Text>

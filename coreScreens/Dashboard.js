@@ -1,5 +1,5 @@
-import React, { useEffect,useLayoutEffect, useState } from 'react'
-import { StyleSheet, View ,ScrollView ,TouchableOpacity } from 'react-native'
+import React, { useCallback, useEffect,useLayoutEffect, useState } from 'react'
+import { StyleSheet, View ,ScrollView ,TouchableOpacity , RefreshControl} from 'react-native'
 import { Button, Avatar, Text } from 'react-native-elements'
 import { useDispatch, useSelector } from 'react-redux'
 import TripListItem from './../components/TripListItem'
@@ -7,17 +7,25 @@ import { clearJWT, isAuthenticated } from '../helpers/authHelpers'
 import { getUserProfile } from './../redux/userProfile/userProfileSlice'
 import AdminBoard from './../screens/Admin/AdminBoard'
 import CustomerBoard from './../screens/customer/CustomerBoard'
+import { getTrips } from '../redux/trip/tripSlice'
 
 
 const Dashboard = ({navigation}) => {
+  const [refreshing, setRefreshing] = useState(false)
 
   const [auth, setAuth] = useState()
   const trips = useSelector(state => state?.trips?.tripList)
   const user = useSelector(state => state.user?.userProfile)
   const nav = navigation
     
-  console.log("Trips from store: ", trips)
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
+  const onRefresh = useCallback(() => {
+    setRefreshing(true)
+    dispatch(getTrips()).then(() => setRefreshing(false));
+  },[refreshing]);
+
+  // console.log("Trips from store: ", trips)
+  
 
   const enterTicketing = (trip) => {
       navigation.navigate("TicketingScreen", trip)
@@ -64,39 +72,41 @@ const Dashboard = ({navigation}) => {
     // })
 
     return (
-        <View style= {styles.container}>
-
+      <View style= {styles.container}>
             { (user?.isAdmin) ? 
-               
+                 <AdminBoard navigation={nav} />
+                 :
               <>
 
-                <AdminBoard navigation={nav} />
-    
-              </>
-              :
-              <>
-
-                 <CustomerBoard navigation={nav} />
-
-
-                  <Text style={{fontWeight:'bold',fontSize:20,marginTop:10, alignSelf:'center'}}>Available Trips</Text>
-                  <ScrollView  showsVerticalScrollIndicator={false} >
-
-                            {
+                <CustomerBoard navigation={nav} />
+                
+                <ScrollView  
+                showsVerticalScrollIndicator={false} 
+                  refreshControl = {<RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={onRefresh}
+                    />
+                  }
+                  >
+                    <Text style={{fontWeight:'bold',fontSize:20,marginTop:10, alignSelf:'center'}}>Available Trips</Text>
+                  {
+                    trips.map((trip, i) => 
+                    <TouchableOpacity 
+                    activeOpacity={0.2}
+                    style={{borderRadius:5 }}
+                    key = {i} 
+                    onPress={() => enterTicketing(trip) }
+                      >
                               
-                              trips.map((trip, i) => 
-                              <TouchableOpacity 
-                                      key = {i} onPress={() => enterTicketing(trip) }>
-                                        
-                                  <TripListItem 
-                                      
-                                      trip={trip} 
-                                      
-                                  />          
-                                  
-                              </TouchableOpacity>
-                  )}
-                  </ScrollView>
+                        <TripListItem 
+                            
+                            trip={trip} 
+                            
+                            />          
+                        
+                    </TouchableOpacity>
+                )}
+                </ScrollView>
                                 
                                   
 
@@ -118,12 +128,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width:'100%',
     justifyContent: 'center',
-    // marginTop:20
     },  
-  button: {backgroundColor:'blue',
-     borderRadius:5 
-
-    },
     text: {
         padding:10, 
         color:'white', 

@@ -26,7 +26,7 @@ const CustomerBoard = ({navigation}) => {
     
     return (
         <View style={{width:'100%'}} >
-            <Text style={{fontWeight:'500',marginLeft:15}}>Hello {user? (user?.name): "User"}</Text>
+            {/* <Text style={{fontWeight:'500',marginLeft:15}}>Hello {user? (user?.name): "User"}</Text> */}
             <View >
                 <View style={{flexDirection:"row",justifyContent:'space-evenly', marginVertical:10}}>
                     <TouchableOpacity onPress={toBooking} style={styles.button}>
@@ -47,23 +47,14 @@ const CustomerBoard = ({navigation}) => {
                 </View>
 
                 <View style={{flexDirection:"row",justifyContent:'space-evenly'}}>
-
-                  
                     <TouchableOpacity onPress={toMessages} style={styles.button}>
                         <Text style={styles.text}>
-                       
-                                    Talk to us
-                        
+                            Talk to us
                         </Text>
-                    </TouchableOpacity> 
-             
-                        
-
-                    <TouchableOpacity onPress={toAccount} style={styles.button}>
-
-
+                    </TouchableOpacity>
+                    <TouchableOpacity  style={styles.button}>
                         <Text style={styles.text}>
-                                                 Check Your account
+                            Check Your account
                         </Text>
                     </TouchableOpacity>
                 </View>
@@ -76,7 +67,7 @@ const CustomerBoard = ({navigation}) => {
 export default CustomerBoard
 
 const styles = StyleSheet.create({
-    button: {backgroundColor:'blue',
+    button: {backgroundColor:'#2c68ed',
      borderRadius:5 
 
     },

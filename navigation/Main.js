@@ -9,6 +9,7 @@ import ProfileEntry from './ProfileEntry';
 
   
 const Tab = createBottomTabNavigator()
+
 const tabBarOptions = {
     showLabel: true,
     activeTintColor: 'green',
@@ -17,9 +18,6 @@ const tabBarOptions = {
     },
 };
 
-
-
-const Stack = createStackNavigator();
 
   const globalOption = {
     headerStyle:{backgroundColor: "#2c68ed"},
@@ -32,8 +30,8 @@ const Stack = createStackNavigator();
 const Main = () => {
     return (
         
-           <Tab.Navigator initialRouteName='EntryPoint' screenOptions={tabBarOptions} >
-                <Tab.Screen name='Booking' component={Booking} />
+           <Tab.Navigator initialRouteName='EntryPoint' screenOptions={globalOption} >
+                <Tab.Screen name='Booking' component={Booking}  />
                 <Tab.Screen name="EntryPoint" component={EntryPoint} options={{ headerShown: false}} />
                 <Tab.Screen  name='Profile' component={ProfileEntry} options={{ headerShown: false}} />
             </Tab.Navigator>
